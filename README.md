@@ -5,10 +5,15 @@ Requirements:
 1. User interaction with the application should occur through an HTTP API, made available on port 4567. Two operations must be supported:
 
 a. POST: Initiates a new search for a term (keyword).
+
 Request:
+
 POST /crawl HTTP/1.1
+
 Host: localhost:4567
+
 Content-Type: application/json
+
 Body: {"keyword": "domain"}
 
 Response:
