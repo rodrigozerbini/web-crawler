@@ -51,6 +51,7 @@ Content-Type: application/json
 7. From the project's root directory, the following two commands, executed in sequence, should compile and start the application:
 
 docker build . -t guerrero-webcrawler
+
 docker run -e BASE_URL=https://www.example.com/ -p 4567:4567 --rm guerrero-webcrawler
 
 Change the BASE_URL variable to use the web crawler on another website.
