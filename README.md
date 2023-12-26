@@ -24,6 +24,7 @@ Content-Type: application/json
 
 Body: {"id": "30vbllyb"}
 
+
 b. GET: Queries search results.
 
 Request:
