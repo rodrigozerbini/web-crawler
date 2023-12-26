@@ -48,9 +48,9 @@ Content-Type: application/json
 
 6. While a search is in progress, its partially found results should be returned by the GET operation.
 
-7. The project must follow the provided base structure. The Dockerfile and pom.xml files cannot be modified. Any other provided file can be modified.
-
-8. From the project's root directory, the following two commands, executed in sequence, should compile and start the application:
+7. From the project's root directory, the following two commands, executed in sequence, should compile and start the application:
 
 docker build . -t guerrero-webcrawler
 docker run -e BASE_URL=https://www.example.com/ -p 4567:4567 --rm guerrero-webcrawler
+
+Change the BASE_URL variable to use the web crawler on another website.
