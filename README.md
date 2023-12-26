@@ -35,7 +35,6 @@ Host: localhost:4567
 200 OK
 
 Content-Type: application/json
-
 {"id": "30vbllyb", "status": "active", "urls": ["https://example.com/"]}
 
 2. The searched term must have a minimum of 4 and a maximum of 32 characters. The search should be case-insensitive, considering any part of the HTML content (including tags and comments).
