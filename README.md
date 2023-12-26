@@ -17,23 +17,35 @@ Content-Type: application/json
 Body: {"keyword": "domain"}
 
 Response:
+
 200 OK
+
 Content-Type: application/json
+
 Body: {"id": "30vbllyb"}
 
 b. GET: Queries search results.
+
 Request:
+
 GET /crawl/30vbllyb HTTP/1.1
+
 Host: localhost:4567
 
 200 OK
+
 Content-Type: application/json
+
 {
   "id": "30vbllyb",
+  
   "status": "active",
+  
   "urls": [
     "https://example.com/",
+    
   ]
+  
 }
 
 2. The searched term must have a minimum of 4 and a maximum of 32 characters. The search should be case-insensitive, considering any part of the HTML content (including tags and comments).
