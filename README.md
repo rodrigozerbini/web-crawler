@@ -1,57 +1,74 @@
-Objective: Develop a Java application to navigate a website in search of a user-provided term and list the URLs where the term is found.
+# Web Crawler API
 
-Requirements:
+## Objective
 
-1. User interaction with the application should occur through an HTTP API, made available on port 4567. Two operations must be supported:
+Develop a Java application that navigates a website to search for a user-provided term and lists the URLs where the term is found.
 
-a. POST: Initiates a new search for a term (keyword).
+## Requirements
 
-Request:
+### User Interaction
 
+User interaction with the application occurs through an HTTP API, available on port `4567`. The API supports two operations:
+
+#### 1. Initiate a New Search
+
+**Method:** `POST`  
+**Endpoint:** `/crawl`  
+
+**Request Example:**
+```
 POST /crawl HTTP/1.1
-
 Host: localhost:4567
-
 Content-Type: application/json
 
 Body: {"keyword": "domain"}
-
-Response:
-
-200 OK
-
+```
+**Response Example:**
+```
+HTTP/1.1 200 OK
 Content-Type: application/json
 
 Body: {"id": "30vbllyb"}
+```
+This operation initiates a new search for the specified keyword. The response returns a unique id for the search.
 
+#### 2. Query Search Results
 
-b. GET: Queries search results.
+**Method:** `GET`  
+**Endpoint:** `/crawl/{id}` 
 
-Request:
-
+**Request Example:**
+```
 GET /crawl/30vbllyb HTTP/1.1
-
 Host: localhost:4567
-
-200 OK
-
+```
+**Response Example:**
+```
+HTTP/1.1 200 OK
 Content-Type: application/json
-{"id": "30vbllyb", "status": "active", "urls": ["https://example.com/"]}
 
-2. The searched term must have a minimum of 4 and a maximum of 32 characters. The search should be case-insensitive, considering any part of the HTML content (including tags and comments).
+Body: {"id": "30vbllyb", "status": "active", "urls": ["https://example.com/"]}
+```
+This operation queries the search results for the specified id.
 
-3. The search's ID must be an automatically generated 8-character alphanumeric code.
+### Additional Requirements
 
-4. The base URL of the website for the analyses is determined by an environment variable. Searches should follow links (absolute and relative) in anchor elements of visited pages only if they have the same base URL.
+- The searched term must have a minimum of 4 and a maximum of 32 characters.
+- The search should be case-insensitive, considering any part of the HTML content (including tags and comments).
+- The search's ID must be an automatically generated 8-character alphanumeric code.
+- The base URL of the website for the analysis is determined by an environment variable.
+- Searches should follow links (absolute and relative) in anchor elements of visited pages only if they have the same base URL.
+- The application must support the execution of multiple simultaneous searches.
+- Information about ongoing (status active) or completed (status done) searches must be kept indefinitely while the application is running.
+- While a search is in progress, its partially found results should be returned by the GET operation.
 
-5. The application must support the execution of multiple simultaneous searches. Information about ongoing (status active) or completed (status done) searches must be kept indefinitely while the application is running.
+### Building and Running the Application
 
-6. While a search is in progress, its partially found results should be returned by the GET operation.
-
-7. From the project's root directory, the following two commands, executed in sequence, should compile and start the application:
-
+From the project's root directory, the following two commands, executed in sequence, should compile and start the application:
+```
 docker build . -t guerrero-webcrawler
-
+```
+```
 docker run -e BASE_URL=https://www.example.com/ -p 4567:4567 --rm guerrero-webcrawler
-
+```
 Change the BASE_URL variable to use the web crawler on another website.
